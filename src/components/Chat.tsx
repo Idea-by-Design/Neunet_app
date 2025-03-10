@@ -27,7 +27,14 @@ interface ChatProps {
   onClose: () => void
 }
 
-const ChatInput = ({ message, setMessage, handleSend, handleKeyPress }: any) => (
+interface ChatInputProps {
+  message: string;
+  setMessage: (message: string) => void;
+  handleSend: () => void;
+  handleKeyPress: (e: React.KeyboardEvent) => void;
+}
+
+const ChatInput = ({ message, setMessage, handleSend, handleKeyPress }: ChatInputProps) => (
   <Box p={4} borderTop="1px" borderColor="gray.100">
     <HStack spacing={2}>
       <Input

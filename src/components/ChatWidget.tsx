@@ -1,4 +1,4 @@
-import { Button, useDisclosure, Box, HStack, Text } from '@chakra-ui/react'
+import { useDisclosure, Box, Text } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { AnimatedLogo } from './AnimatedLogo'
 import { Chat } from './Chat'

@@ -10,10 +10,7 @@ import {
   Select,
   Divider,
   IconButton,
-  Grid,
-  GridItem,
-  Card,
-  CardBody
+  Grid
 } from '@chakra-ui/react'
 import { FiArrowLeft, FiGithub, FiDownload } from 'react-icons/fi'
 import { SiLinkedin } from 'react-icons/si'
