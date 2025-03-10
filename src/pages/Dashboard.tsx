@@ -1,8 +1,5 @@
 import {
   Box,
-  Button,
-  Container,
-  Flex,
   Grid,
   Heading,
   HStack,
@@ -11,7 +8,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
-import { FiArrowRight, FiCalendar, FiSearch, FiUser, FiArrowUpRight, FiBriefcase } from 'react-icons/fi'
+import { FiArrowRight, FiCalendar, FiSearch, FiUser, FiBriefcase } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import UnlimitedJobsImage from '../assets/unlimited-jobs.png'
 import RemoteHiringImage from '../assets/remote-hiring.png'

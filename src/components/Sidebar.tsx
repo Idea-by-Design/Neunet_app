@@ -1,4 +1,4 @@
-import { Box, VStack, Icon, Text, Link as ChakraLink, Button, Flex } from '@chakra-ui/react'
+import { VStack, Icon, Text, Link as ChakraLink, Button, Flex } from '@chakra-ui/react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { FiHome, FiBriefcase, FiUsers, FiSettings, FiLogOut, FiMessageCircle, FiHelpCircle } from 'react-icons/fi'
 import { AnimatedLogo } from './AnimatedLogo'
