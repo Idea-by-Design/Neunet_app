@@ -2,19 +2,12 @@ import {
   Box,
   Input,
   Text,
-  VStack,
   HStack,
   IconButton,
   CloseButton,
-  Button,
-  Icon,
 } from '@chakra-ui/react'
-import { FiSend, FiPlus, FiFileText } from 'react-icons/fi'
-import { RiDashboardLine } from 'react-icons/ri'
-import { BsPersonLinesFill } from 'react-icons/bs'
-import { HiQuestionMarkCircle } from 'react-icons/hi'
+import { FiSend } from 'react-icons/fi'
 import { useState } from 'react'
-import { useLocation, Link as RouterLink } from 'react-router-dom'
 import { AnimatedLogo } from './AnimatedLogo'
 
 interface Message {
@@ -70,12 +63,6 @@ const ChatInput = ({ message, setMessage, handleSend, handleKeyPress }: ChatInpu
 export const Chat = ({ isOpen, onClose }: ChatProps) => {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState<Message[]>([]);
-  const location = useLocation();
-  const isHomePage = location.pathname === '/dashboard';
-  const isCreateJobPage = location.pathname === '/create-job';
-  const showHelpOnly = location.pathname.includes('/job-listings') || 
-                      location.pathname.includes('/job-candidates') ||
-                      location.pathname === '/settings';
 
   const handleSend = () => {
     if (message.trim()) {
@@ -132,161 +119,20 @@ export const Chat = ({ isOpen, onClose }: ChatProps) => {
 
       {/* Content Area */}
       <Box flex={1} overflowY="auto" display="flex" justifyContent="center">
-        {isHomePage && (
-          <VStack spacing={3} width="200px" py={4}>
-            <Button
-              as={RouterLink}
-              to="/dashboard"
-              variant="outline"
-              width="100%"
-              height="44px"
-              leftIcon={<Icon as={RiDashboardLine} boxSize={5} color="#9C6CFE" />}
-              justifyContent="flex-start"
-              fontWeight="normal"
-              borderColor="gray.200"
-              _hover={{ bg: 'gray.50' }}
-            >
-              Dashboard
-            </Button>
-            <Button
-              as={RouterLink}
-              to="/create-job"
-              variant="outline"
-              width="100%"
-              height="44px"
-              leftIcon={<Icon as={FiPlus} boxSize={5} color="#9C6CFE" />}
-              justifyContent="flex-start"
-              fontWeight="normal"
-              borderColor="gray.200"
-              _hover={{ bg: 'gray.50' }}
-            >
-              Create a job
-            </Button>
-            <Button
-              as={RouterLink}
-              to="/job-listings"
-              variant="outline"
-              width="100%"
-              height="44px"
-              leftIcon={<Icon as={BsPersonLinesFill} boxSize={5} color="#9C6CFE" />}
-              justifyContent="flex-start"
-              fontWeight="normal"
-              borderColor="gray.200"
-              _hover={{ bg: 'gray.50' }}
-            >
-              Job listings
-            </Button>
-            <Button
-              as={RouterLink}
-              to="/help"
-              variant="outline"
-              width="100%"
-              height="44px"
-              leftIcon={<Icon as={HiQuestionMarkCircle} boxSize={5} color="#F97316" />}
-              justifyContent="flex-start"
-              fontWeight="normal"
-              borderColor="gray.200"
-              _hover={{ bg: 'gray.50' }}
-            >
-              Help
-            </Button>
-          </VStack>
-        )}
-        {isCreateJobPage && (
-          <VStack spacing={3} width="200px" py={4}>
-            <Button
-              variant="outline"
-              width="100%"
-              height="44px"
-              leftIcon={<Icon as={FiFileText} boxSize={5} color="#9C6CFE" />}
-              justifyContent="flex-start"
-              fontWeight="normal"
-              borderColor="gray.200"
-              _hover={{ bg: 'gray.50' }}
-            >
-              Select template
-            </Button>
-            <Button
-              variant="outline"
-              width="100%"
-              height="44px"
-              leftIcon={<Icon as={HiQuestionMarkCircle} boxSize={5} color="#F97316" />}
-              justifyContent="flex-start"
-              fontWeight="normal"
-              borderColor="gray.200"
-              _hover={{ bg: 'gray.50' }}
-            >
-              Help
-            </Button>
-          </VStack>
-        )}
-        {showHelpOnly && (
-          <VStack spacing={3} width="200px" py={4}>
-            <Button
-              variant="outline"
-              width="100%"
-              height="44px"
-              leftIcon={<Icon as={HiQuestionMarkCircle} boxSize={5} color="#F97316" />}
-              justifyContent="flex-start"
-              fontWeight="normal"
-              borderColor="gray.200"
-              _hover={{ bg: 'gray.50' }}
-            >
-              Help
-            </Button>
-          </VStack>
-        )}
-        {!isHomePage && !isCreateJobPage && !showHelpOnly && (
-          <VStack spacing={4} width="200px">
-            {messages.map((msg, index) => (
-              <Box
-                key={index}
-                bg={msg.sender === 'user' ? '#8A5EE3' : '#F7F7F7'}
-                color={msg.sender === 'user' ? 'white' : 'black'}
-                py={2}
-                px={4}
-                borderRadius="lg"
-                alignSelf={msg.sender === 'user' ? 'flex-end' : 'flex-start'}
-                maxW="80%"
-              >
-                <Text>{msg.text}</Text>
-              </Box>
-            ))}
-          </VStack>
-        )}
+        {messages.map((msg, index) => (
+          <Box key={index} p={2}>
+            <Text>{msg.text}</Text>
+          </Box>
+        ))}
       </Box>
 
-      {/* Input Area */}
-      <Box p={4} borderTop="1px" borderColor="gray.100">
-        <HStack spacing={2}>
-          <Input
-            placeholder="Message AI Assistant..."
-            bg="gray.50"
-            border="none"
-            size="md"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            onKeyPress={handleKeyPress}
-            _focus={{ 
-              bg: 'white',
-              ring: 1,
-              ringColor: '#9C6CFE'
-            }}
-            _placeholder={{
-              color: 'gray.400'
-            }}
-          />
-          <IconButton
-            aria-label="Send message"
-            icon={<FiSend />}
-            onClick={handleSend}
-            bg="#9C6CFE"
-            color="white"
-            size="md"
-            _hover={{ bg: '#8A5EE3' }}
-          />
-        </HStack>
-      </Box>
+      {/* Chat Input */}
+      <ChatInput
+        message={message}
+        setMessage={setMessage}
+        handleSend={handleSend}
+        handleKeyPress={handleKeyPress}
+      />
     </Box>
   );
 };
